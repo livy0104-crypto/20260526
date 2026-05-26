@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI MV 製作招商｜創作、變現、放大品牌影響力</title>
+  <meta name="description" content="AI MV 製作招商網站｜以影像、聲音與 AI 工具，打造高轉換的品牌內容與商業合作機會。" />
+  <style>
+    :root {
+      --bg: #050816;
+      --panel: rgba(10, 14, 30, 0.68);
+      --panel-2: rgba(255, 255, 255, 0.06);
+      --text: #f5f7ff;
+      --muted: rgba(245, 247, 255, 0.72);
+      --line: rgba(255, 255, 255, 0.12);
+      --accent: #8b5cf6;
+      --accent-2: #22d3ee;
+      --accent-3: #f472b6;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+      --radius: 28px;
+      --radius-sm: 18px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+      overflow: hidden;
+      background:
+        radial-gradient(1200px 700px at 20% 20%, rgba(139, 92, 246, 0.22), transparent 45%),
+        radial-gradient(900px 600px at 80% 30%, rgba(34, 211, 238, 0.18), transparent 50%),
+        linear-gradient(180deg, rgba(5,8,22,0.55), rgba(5,8,22,0.88));
+    }
+
+    .video-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .video-bg iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 56.25vw; /* 16:9 */
+      min-width: 177.78vh;
+      min-height: 100vh;
+      transform: translate(-50%, -50%) scale(1.02);
+      border: 0;
+      pointer-events: none;
+      filter: saturate(1.05) contrast(1.05) brightness(0.72);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(180deg, rgba(5,8,22,0.24) 0%, rgba(5,8,22,0.58) 45%, rgba(5,8,22,0.95) 100%),
+        radial-gradient(circle at 50% 35%, rgba(255,255,255,0.12), transparent 42%);
+    }
+
+    .noise {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.08;
+      background-image: linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px);
+      background-size: 70px 70px;
+      mix-blend-mode: overlay;
+      mask-image: radial-gradient(circle at center, black 20%, transparent 80%);
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 30;
+      backdrop-filter: blur(18px);
+      background: rgba(5, 8, 22, 0.42);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 18px 40px rgba(139, 92, 246, 0.28);
+      color: white;
+      font-weight: 800;
+    }
+
+    .nav {
+      display: flex;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav a:hover { color: #fff; }
+
+    .hero-grid {
+      width: 100%;
+      padding: 110px 0 72px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.88);
+      font-size: 14px;
+      margin-bottom: 18px;
+      width: fit-content;
+    }
+
+    .title {
+      font-size: clamp(42px, 6vw, 82px);
+      line-height: 0.96;
+      margin: 0;
+      letter-spacing: -0.04em;
+      max-width: 10ch;
+    }
+
+    .title .accent {
+      background: linear-gradient(90deg, #fff, #d8b4fe 40%, #67e8f9 72%, #fff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      margin: 22px 0 0;
+      max-width: 62ch;
+      font-size: clamp(16px, 1.4vw, 19px);
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      border: 0;
+      padding: 14px 22px;
+      border-radius: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #07111f;
+      background: linear-gradient(135deg, #fff, #dbeafe 35%, #67e8f9);
+      box-shadow: 0 16px 42px rgba(103, 232, 249, 0.22);
+    }
+
+    .btn-secondary {
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-card {
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px);
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -30% -50% auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34,211,238,0.22), transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .metric {
+      border-radius: 20px;
+      padding: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .metric .num {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .metric .label {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .scroll-hint {
+      margin-top: 20px;
+      color: rgba(255,255,255,0.65);
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .section {
+      padding: 84px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      color: #b9c7ff;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 52px);
+      letter-spacing: -0.04em;
+      line-height: 1.06;
+      max-width: 12ch;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 60ch;
+      margin: 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      border-radius: var(--radius);
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.16);
+      backdrop-filter: blur(14px);
+      min-height: 180px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .portfolio {
+      padding: 12px 0 70px;
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .showcase-card {
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      box-shadow: 0 18px 60px rgba(0,0,0,0.16);
+      backdrop-filter: blur(14px);
+    }
+
+    .showcase-video {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .showcase-video iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      pointer-events: none;
+    }
+
+    .showcase-meta {
+      padding: 18px 18px 20px;
+    }
+
+    .showcase-meta h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .showcase-meta p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.88);
+      font-size: 13px;
+    }
+
+    .pricing {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .pricing-box {
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(139,92,246,0.18), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .pricing-box ul {
+      padding-left: 20px;
+      margin: 16px 0 0;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .price-tag {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-top: 18px;
+      padding: 12px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-weight: 800;
+    }
+
+    .price-tag span {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .step-num {
+      width: 64px;
+      height: 64px;
+      border-radius: 20px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(139,92,246,0.28), rgba(34,211,238,0.22));
+      border: 1px solid rgba(255,255,255,0.14);
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .step h4 { margin: 0 0 8px; font-size: 18px; }
+    .step p { margin: 0; color: var(--muted); line-height: 1.75; }
+
+    .cta {
+      padding: 18px 0 90px;
+    }
+
+    .cta-box {
+      position: relative;
+      overflow: hidden;
+      border-radius: calc(var(--radius) + 8px);
+      background:
+        radial-gradient(900px 300px at 20% 20%, rgba(34,211,238,0.28), transparent 45%),
+        radial-gradient(700px 280px at 80% 30%, rgba(236,72,153,0.24), transparent 50%),
+        linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+      padding: 34px;
+    }
+
+    .cta-box h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      max-width: 12ch;
+    }
+
+    .cta-box p {
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 60ch;
+      margin: 16px 0 0;
+    }
+
+    .contact-grid {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .contact-copy {
+      border-radius: 22px;
+      padding: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .contact-copy h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .contact-copy p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .contact-list {
+      margin: 20px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.9;
+    }
+
+    .contact-card {
+      border-radius: 24px;
+      padding: 22px;
+      background: rgba(5, 8, 22, 0.48);
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    .contact-card .eyebrow {
+      margin-bottom: 8px;
+    }
+
+    .form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field.full { grid-column: 1 / -1; }
+
+    .field label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.72);
+      letter-spacing: 0.04em;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(7, 10, 22, 0.46);
+      color: #fff;
+      padding: 14px 16px;
+      outline: none;
+    }
+
+    .field textarea { min-height: 130px; resize: vertical; }
+
+    .field small {
+      color: rgba(255,255,255,0.65);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-top: 12px;
+    }
+
+    .hidden-iframe {
+      width: 0;
+      height: 0;
+      border: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(5, 8, 22, 0.72);
+      backdrop-filter: blur(10px);
+    }
+
+    .modal-backdrop.is-open {
+      display: grid;
+    }
+
+    .modal-card {
+      width: min(460px, 100%);
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      text-align: center;
+    }
+
+    .modal-card h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      letter-spacing: -0.03em;
+    }
+
+    .modal-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .footer {
+      padding: 18px 0 34px;
+      color: rgba(255,255,255,0.56);
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .fade-up {
+      animation: fadeUp .9s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .pricing,
+      .section-head,
+      .grid-3,
+      .showcase-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav { display: none; }
+      .hero { min-height: auto; }
+      .hero-grid { padding-top: 92px; }
+      .title { max-width: 12ch; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(var(--max), calc(100% - 28px)); }
+      .topbar-inner { padding: 12px 0; }
+      .brand-mark { width: 38px; height: 38px; border-radius: 12px; }
+      .hero-grid { gap: 18px; }
+      .card, .pricing-box, .cta-box { padding: 22px; }
+      .form { grid-template-columns: 1fr; }
+      .metric-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-mark">AI</div>
+        <div>
+          <div>AI MV Studio</div>
+          <div style="font-size:12px;color:var(--muted);font-weight:500;">招商網站 / Brand Partnership</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#features">核心優勢</a>
+        <a href="#solutions">合作方案</a>
+        <a href="#process">製作流程</a>
+        <a href="#contact">立即洽談</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="video-bg" aria-hidden="true">
+        <iframe
+          id="bgVideo"
+          title="Background video"
+          src="https://www.youtube.com/embed/1a3AU2SqQhk?autoplay=1&mute=1&controls=0&loop=1&playlist=1a3AU2SqQhk&playsinline=1&modestbranding=1&rel=0&iv_load_policy=3&disablekb=1&fs=0&showinfo=0"
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <div class="noise" aria-hidden="true"></div>
+
+      <div class="container hero-grid">
+        <div class="fade-up">
+          <div class="badge">⚡ AI MV 製作招商｜影片、音樂、品牌一次整合</div>
+          <h1 class="title"><span class="accent">把內容變成可招商的生意</span></h1>
+          <p class="lead">
+            這不是一般作品集。這是一個能夠吸引合作夥伴、品牌主、代理商與創作者的 AI MV 招商入口。
+            以高質感影像、清晰價值主張與行動導向版面，直接把詢問率拉上來。
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#contact">預約合作洽談</a>
+            <a class="btn btn-secondary" href="#solutions">查看合作方案</a>
+          </div>
+          <div class="scroll-hint">Scroll / 影片自動循環播放</div>
+        </div>
+
+        <aside class="hero-card fade-up" style="animation-delay:.08s;">
+          <h3>招商頁面應該長這樣</h3>
+          <p style="margin:0;color:var(--muted);line-height:1.75;">
+            首屏先建立視覺衝擊，再用數據與方案把信任補齊。看起來像作品，運作上像銷售機器。
+          </p>
+          <div class="metric-grid">
+            <div class="metric">
+              <div class="num">24/7</div>
+              <div class="label">全時展示品牌與影片主視覺</div>
+            </div>
+            <div class="metric">
+              <div class="num">1</div>
+              <div class="label">頁完成曝光、轉換、洽談閉環</div>
+            </div>
+            <div class="metric">
+              <div class="num">∞</div>
+              <div class="label">可延伸為多案型、系列頁與活動頁</div>
+            </div>
+            <div class="metric">
+              <div class="num">AI</div>
+              <div class="label">內容產出效率與視覺一致性同步提升</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">核心優勢</div>
+            <h2 class="section-title">把流量頁做成成交頁</h2>
+          </div>
+          <p class="section-desc">
+            這個版型的目標很單純：讓人停下來、看懂、願意聯絡。少一點空話，多一點結構。網站不會自己賺錢，但它可以幫你少浪費錢。
+          </p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <h3>滿版影片首屏</h3>
+            <p>使用背景影片作為首頁第一層視覺記憶點，搭配半透明層與漸層遮罩，讓文字永遠可讀。</p>
+            <div class="pill-row">
+              <span class="pill">Autoplay</span>
+              <span class="pill">Loop</span>
+              <span class="pill">Mute</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>招商資訊模組化</h3>
+            <p>合作方案、流程、數據、FAQ 與聯絡表單各自獨立，方便後續替換內容或做 A/B 測試。</p>
+            <div class="pill-row">
+              <span class="pill">Modular</span>
+              <span class="pill">Scalable</span>
+              <span class="pill">Editable</span>
+            </div>
+          </article>
+          <article class="card">
+            <h3>高轉換 CTA</h3>
+            <p>把「看完再說」改成「現在就預約」。按鈕與表單設計偏向明確動作，不讓訪客迷路。</p>
+            <div class="pill-row">
+              <span class="pill">CTA First</span>
+              <span class="pill">Lead Gen</span>
+              <span class="pill">Fast Reply</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="solutions" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">合作方案</div>
+            <h2 class="section-title">把合作條件說清楚，省掉來回猜</h2>
+          </div>
+          <p class="section-desc">可直接替換成你的實際招商方案、價目或權益內容。這裡先給一個可落地的版型。</p>
+        </div>
+
+        <div class="pricing">
+          <div class="pricing-box">
+            <div class="eyebrow">推薦方案</div>
+            <h3 style="margin:0;font-size:28px;letter-spacing:-.03em;">AI MV 聯名製作 / 品牌授權 / 內容共創</h3>
+            <p style="margin:14px 0 0;color:var(--muted);line-height:1.85;max-width:70ch;">
+              適合品牌主、藝人團隊、音樂廠牌、IP 合作方、活動主辦與內容代理商。可依需求組合 MV 內容製作、短影音切片、社群宣傳包與投放素材。
+            </p>
+            <div class="price-tag">方案可客製 <span>依專案規模調整</span></div>
+            <ul>
+              <li>主視覺 MV / teaser / short cut 一次規劃</li>
+              <li>品牌訊息融入腳本、分鏡與畫面節奏</li>
+              <li>支援多語系字幕與跨平台版型</li>
+              <li>交付內容可直接用於招商、官宣與宣傳投放</li>
+            </ul>
+          </div>
+
+          <div class="timeline">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div>
+                <h4>需求確認</h4>
+                <p>釐清品牌目標、影片定位、受眾輪廓與預期轉換行為。</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div>
+                <h4>腳本與視覺設計</h4>
+                <p>以 AI 工具加速概念提案、分鏡、視覺風格與素材整合。</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div>
+                <h4>製作與交付</h4>
+                <p>完成 MV 主片、延伸短片與招商頁素材，讓內容可以立即上線。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process" class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">製作流程</div>
+            <h2 class="section-title">從概念到成交，四步走完</h2>
+          </div>
+          <p class="section-desc">流程越透明，合作決策越快。這點跟工程一樣，沒有魔法，只有拆解。</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card">
+            <h3>01 / 定位</h3>
+            <p>先定義你要吸引誰、賣什麼、為什麼現在要談合作。沒有這一步，所有美術都只是裝飾。</p>
+          </article>
+          <article class="card">
+            <h3>02 / 視覺化</h3>
+            <p>建立影片封面、色調、文案層級與 CTA 動線，讓首頁既像品牌，也像業務。</p>
+          </article>
+          <article class="card">
+            <h3>03 / 上線與迭代</h3>
+            <p>觀察點擊與詢問，再微調文案、按鈕與段落順序。網站不是雕像，是版本控制。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="cta">
+      <div class="container">
+        <div class="cta-box">
+          <div class="eyebrow">聯絡我／合作洽詢</div>
+          <h2>把你的 AI MV 招商網站，做成有質感也有成交力的入口</h2>
+          <p>
+            你可以直接把這份 HTML 當作第一版。要改成更偏「品牌招商」、更偏「接案業務」、或更偏「活動募資」，都只是內容結構和視覺重心的調整。
+          </p>
+
+          <div class="contact-grid">
+            <div class="contact-copy">
+              <h3>這裡不是單純填表單，而是內容入口</h3>
+              <p>
+                我們會把你的需求整理成可後續追蹤的合作資訊，方便你快速評估是否需要進一步製作、提案或接洽。
+              </p>
+              <ul class="contact-list">
+                <li>品牌合作、聯名企劃、內容共創</li>
+                <li>MV 內容製作、短影音宣傳素材</li>
+                <li>投放與內容策略整合建議</li>
+              </ul>
+            </div>
+
+            <div class="contact-card">
+              <div class="eyebrow">線上表單</div>
+              <p style="margin-top:0;color:var(--muted);line-height:1.75;">
+                表單會在背景靜默送出至 Google 表單，不會跳轉頁面，送出後會顯示自訂提示視窗。
+              </p>
+
+              <form id="contactForm" class="form" novalidate action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeTbLmPJs53-nIt2wjXTW-uOgLNKZTlkievsjhZZ2ZXg6dkWw/formResponse" method="POST" target="contactIframe">
+                <div class="field">
+                  <label for="name">姓名</label>
+                  <input id="name" name="entry.588998168" type="text" placeholder="請輸入姓名" required autocomplete="name" />
+                </div>
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" name="entry.476214014" type="email" placeholder="name@example.com" required autocomplete="email" />
+                </div>
+                <div class="field">
+                  <label for="projectType">企劃類型</label>
+                  <input id="projectType" name="entry.1610329698" type="text" placeholder="例如：品牌聯名、AI MV、活動宣傳" required />
+                </div>
+                <div class="field full">
+                  <label for="message">需求簡述</label>
+                  <textarea id="message" name="entry.1646642689" placeholder="請簡述合作方向、目標、預算或時程" required></textarea>
+                  <small>資料會直接提交到 Google 表單，並保持在目前頁面中完成送出。</small>
+                </div>
+                <div class="field full contact-actions">
+                  <button class="btn btn-primary" type="submit">送出合作需求</button>
+                  <a class="btn btn-secondary" href="https://youtu.be/1a3AU2SqQhk" target="_blank" rel="noopener">查看原始影片</a>
+                </div>
+                <input type="hidden" name="fvv" value="1" />
+                <input type="hidden" name="partialResponse" value="[null,null,&quot;7205679794585345002&quot;]" />
+                <input type="hidden" name="pageHistory" value="0" />
+                <input type="hidden" name="fbzx" value="7205679794585345002" />
+                <input type="hidden" name="submissionTimestamp" value="-1" />
+              </form>
+
+              <iframe id="contactIframe" name="contactIframe" class="hidden-iframe" title="Google 表單背景送出" aria-hidden="true"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="successModal" class="modal-backdrop" aria-hidden="true">
+      <div class="modal-card">
+        <div class="eyebrow">需求已收到</div>
+        <h3>需求已送出，我們將盡快與您聯絡！</h3>
+        <p>感謝您的合作邀約，若有需要補充的內容，我們會再與您確認。</p>
+        <div class="contact-actions" style="justify-content:center; margin-top:20px;">
+          <button id="closeSuccessModal" class="btn btn-primary" type="button">我知道了</button>
+        </div>
+      </div>
+    </div>
+
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">作品集展示</div>
+            <h2 class="section-title">YouTube Shorts 作品集</h2>
+          </div>
+          <p class="section-desc">
+            這裡以純畫面呈現三支作品，保留自動播放、靜音與循環播放的效果，適合直接放在合作頁面當成作品展示區。
+          </p>
+        </div>
+
+        <div class="showcase-grid">
+          <article class="showcase-card">
+            <div class="showcase-video">
+              <iframe
+                title="VOBO 皮鞋 Shorts"
+                src="https://www.youtube.com/embed/h7hM5BlOcMY?autoplay=1&mute=1&loop=1&playlist=h7hM5BlOcMY&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="showcase-meta">
+              <h3>VOBO 皮鞋</h3>
+              <p>以高質感短影音呈現品牌氛圍與鞋款視覺重點，適合作為產品宣傳與內容展示。</p>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <div class="showcase-video">
+              <iframe
+                title="SHARK 鯊克防水鞋 Shorts"
+                src="https://www.youtube.com/embed/bcFnNsTVntk?autoplay=1&mute=1&loop=1&playlist=bcFnNsTVntk&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="showcase-meta">
+              <h3>SHARK 鯊克防水鞋</h3>
+              <p>強調防水與實用性，將產品特點轉換成清楚、快速、易於吸睛的視覺節奏。</p>
+            </div>
+          </article>
+
+          <article class="showcase-card">
+            <div class="showcase-video">
+              <iframe
+                title="黑武士鞋 Shorts"
+                src="https://www.youtube.com/embed/n9VTjZdNvEQ?autoplay=1&mute=1&loop=1&playlist=n9VTjZdNvEQ&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <div class="showcase-meta">
+              <h3>黑武士鞋</h3>
+              <p>以酷炫風格與高對比畫面營造品牌辨識度，適合用來呈現品項主題與風格化內容。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;">
+      <div>AI MV Studio © 2026</div>
+      <div>Background video: YouTube embed with autoplay, mute, and loop.</div>
+    </div>
+  </footer>
+
+  <script>
+    const contactForm = document.getElementById('contactForm');
+    const contactIframe = document.getElementById('contactIframe');
+    const successModal = document.getElementById('successModal');
+    const closeSuccessModal = document.getElementById('closeSuccessModal');
+    let isSubmitting = false;
+
+    function openSuccessModal() {
+      successModal.classList.add('is-open');
+      successModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeSuccessModalHandler() {
+      successModal.classList.remove('is-open');
+      successModal.setAttribute('aria-hidden', 'true');
+    }
+
+    if (closeSuccessModal) {
+      closeSuccessModal.addEventListener('click', closeSuccessModalHandler);
+    }
+
+    successModal.addEventListener('click', (event) => {
+      if (event.target === successModal) {
+        closeSuccessModalHandler();
+      }
+    });
+
+    if (contactIframe) {
+      contactIframe.addEventListener('load', () => {
+        if (isSubmitting) {
+          isSubmitting = false;
+          openSuccessModal();
+          contactForm.reset();
+        }
+      });
+    }
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        if (!contactForm.reportValidity()) {
+          return;
+        }
+
+        isSubmitting = true;
+        contactForm.submit();
+      });
+    }
+  </script>
+</body>
+</html>
