@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>蘇蘇蘇 | AI Marketing & Data Strategy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6+O5Yw1+EwB0N1xY6q0ub1R4/6Yf4bM2JbB9v7S7v2gA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#009DE0',
+            secondary: '#00B39F',
+            accent: '#FFB703',
+            techBlue: '#0077BB',
+            techPurple: '#7C3AED',
+            mint: '#56C02B',
+            lightBlue: '#66CCF2',
+            lightGray: '#E6ECF1',
+            darkGray: '#5A5A5A'
+          },
+          boxShadow: {
+            glow: '0 18px 55px rgba(0, 125, 255, 0.14)',
+            mint: '0 18px 55px rgba(86, 192, 43, 0.16)',
+            soft: '0 18px 50px rgba(15, 23, 42, 0.07)'
+          },
+          keyframes: {
+            floaty: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-14px)' }
+            },
+            drift: {
+              '0%': { transform: 'translate3d(0,0,0)' },
+              '50%': { transform: 'translate3d(10px,-10px,0)' },
+              '100%': { transform: 'translate3d(0,0,0)' }
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+              '100%': { backgroundPosition: '0% 50%' }
+            }
+          },
+          animation: {
+            floaty: 'floaty 8s ease-in-out infinite',
+            drift: 'drift 12s ease-in-out infinite',
+            shimmer: 'shimmer 8s ease infinite'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background:
+        radial-gradient(circle at 20% 10%, rgba(0, 125, 255, 0.10), transparent 28%),
+        radial-gradient(circle at 80% 15%, rgba(124, 58, 237, 0.08), transparent 24%),
+        radial-gradient(circle at 60% 85%, rgba(86, 192, 43, 0.07), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, #E6ECF1 48%, #ffffff 100%);
+      color: #5A5A5A;
+      overflow-x: hidden;
+    }
+
+    .gradient-border::before {
+      background: linear-gradient(135deg, rgba(0, 125, 255, 0.9), rgba(124, 58, 237, 0.75), rgba(86, 192, 43, 0.75));
+    }
+
+    .card-hover:hover {
+      box-shadow: 0 26px 70px rgba(0, 125, 255, 0.12);
+      border-color: rgba(0, 125, 255, 0.26);
+    }
+
+    .dot-grid {
+      background-image:
+        linear-gradient(rgba(0, 125, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 125, 255, 0.05) 1px, transparent 1px);
+    }
+
+    .type-caret::after {
+      color: #0077BB;
+    }
+
+    .link-underline {
+      background: linear-gradient(90deg, rgba(0, 125, 255, 0.15), rgba(124, 58, 237, 0.12), rgba(86, 192, 43, 0.12));
+    }
+
+    .hero-ring {
+      background: radial-gradient(circle, rgba(0, 125, 255, 0.14), rgba(124, 58, 237, 0.09) 40%, transparent 68%);
+    }
+  </style>
+</head>
+<body class="selection:bg-techBlue selection:text-white">
+  <!-- Background layers -->
+  <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute inset-0 dot-grid"></div>
+    <div id="particles" class="absolute inset-0"></div>
+    <div class="absolute -top-28 left-[-8%] h-96 w-96 rounded-full bg-techBlue/10 blur-3xl animate-drift"></div>
+    <div class="absolute top-24 right-[-6%] h-[26rem] w-[26rem] rounded-full bg-techPurple/10 blur-3xl animate-floaty"></div>
+    <div class="absolute bottom-[-10%] left-[38%] h-[22rem] w-[22rem] rounded-full bg-mint/10 blur-3xl animate-drift"></div>
+    <svg class="absolute inset-0 h-full w-full opacity-[0.18]" viewBox="0 0 1440 1200" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="lineGrad" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0%" stop-color="#2563eb" stop-opacity="0.0"/>
+          <stop offset="50%" stop-color="#2563eb" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#10b981" stop-opacity="0.0"/>
+        </linearGradient>
+      </defs>
+      <path d="M-40 210 C 240 140, 390 280, 680 210 S 1120 90, 1480 180" fill="none" stroke="url(#lineGrad)" stroke-width="1.2"/>
+      <path d="M-40 470 C 230 390, 430 560, 710 490 S 1130 360, 1480 470" fill="none" stroke="url(#lineGrad)" stroke-width="1.2"/>
+      <path d="M-40 790 C 260 690, 460 900, 760 800 S 1140 680, 1480 760" fill="none" stroke="url(#lineGrad)" stroke-width="1.2"/>
+      <circle cx="160" cy="190" r="3" fill="#2563eb" fill-opacity="0.55"/>
+      <circle cx="390" cy="285" r="2.5" fill="#10b981" fill-opacity="0.55"/>
+      <circle cx="1010" cy="116" r="3" fill="#7c3aed" fill-opacity="0.52"/>
+      <circle cx="1240" cy="470" r="2.5" fill="#2563eb" fill-opacity="0.45"/>
+      <circle cx="270" cy="820" r="3" fill="#10b981" fill-opacity="0.5"/>
+      <circle cx="1120" cy="820" r="2.5" fill="#7c3aed" fill-opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- Navbar -->
+  <header class="fixed top-0 z-50 w-full">
+    <div id="navBar" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4 transition-all duration-300">
+      <div class="glass-strong gradient-border flex items-center justify-between rounded-3xl px-4 py-3 shadow-soft">
+        <a href="#home" class="flex items-center gap-3 group">
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-techBlue via-techPurple to-mint text-white shadow-glow">
+            <span class="text-sm font-semibold">SI</span>
+          </div>
+          <div>
+            <div class="text-sm font-semibold tracking-[0.22em] text-slate-500 uppercase">蘇蘇蘇</div>
+            <div class="text-xs text-slate-400">AI Marketing · Data Strategy</div>
+          </div>
+        </a>
+
+        <nav class="hidden md:flex items-center gap-1 text-sm font-medium text-slate-600">
+          <a class="rounded-full px-4 py-2 transition hover:bg-white/80 hover:text-techBlue" href="#home">首頁</a>
+          <a class="rounded-full px-4 py-2 transition hover:bg-white/80 hover:text-techBlue" href="#about">關於我</a>
+          <a class="rounded-full px-4 py-2 transition hover:bg-white/80 hover:text-techBlue" href="#solutions">AI 解決方案</a>
+          <a class="rounded-full px-4 py-2 transition hover:bg-white/80 hover:text-techBlue" href="#cases">實戰案例</a>
+          <a class="rounded-full px-4 py-2 transition hover:bg-white/80 hover:text-techBlue" href="#contact">預約諮詢</a>
+        </nav>
+
+        <a href="https://calendar.app.google/TFanAbyEBCKUNZmu9" target="_blank" rel="noreferrer"
+           class="cta-wrap relative inline-flex items-center justify-center overflow-hidden rounded-full px-5 py-3 text-sm font-semibold text-techBlue transition-all duration-300">
+          <span class="absolute inset-0 rounded-full bg-white/75"></span>
+          <span class="absolute inset-0 rounded-full border border-transparent bg-gradient-to-r from-techBlue via-techPurple to-mint p-[1px]"></span>
+          <span class="absolute inset-0 rounded-full bg-white/60 backdrop-blur-xl"></span>
+          <span class="relative z-10 cta-label">預約諮詢</span>
+          <span class="tooltip-badge rounded-full border border-mint/30 bg-white px-3 py-1 text-xs text-mint shadow-mint">Status: Ready to Connect</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="relative pt-28 sm:pt-32">
+    <!-- Hero -->
+    <section id="home" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] py-16 lg:py-24">
+        <div class="fade-up">
+          <div class="inline-flex items-center gap-2 rounded-full border border-techBlue/15 bg-white/80 px-4 py-2 text-xs font-semibold tracking-[0.18em] text-slate-500 uppercase shadow-sm">
+            <span class="h-2 w-2 rounded-full bg-mint shadow-[0_0_0_6px_rgba(16,185,129,0.12)]"></span>
+            AI × Marketing × Data Science
+          </div>
+
+          <h1 class="mt-6 max-w-4xl text-4xl font-semibold leading-tight tracking-tight text-slate-950 sm:text-5xl lg:text-7xl">
+            <span id="typewriter" class="type-caret bg-gradient-to-r from-techBlue via-techPurple to-mint bg-clip-text text-transparent"></span>
+          </h1>
+
+          <p class="mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+            I help businesses transform knowledge, workflows, and customer experience through practical AI Marketing solutions.
+          </p>
+
+          <div class="mt-10 flex flex-wrap items-center gap-4">
+            <a href="https://calendar.app.google/TFanAbyEBCKUNZmu9" target="_blank" rel="noreferrer"
+               class="cta-wrap group relative inline-flex items-center justify-center overflow-hidden rounded-full px-7 py-4 text-sm font-semibold shadow-soft transition-all duration-300 hover:-translate-y-0.5">
+              <span class="absolute inset-0 rounded-full bg-white/80"></span>
+              <span class="absolute inset-0 rounded-full bg-gradient-to-r from-techBlue via-techPurple to-mint opacity-90 p-[1px]"></span>
+              <span class="absolute inset-0 rounded-full bg-white/70 backdrop-blur-xl transition group-hover:bg-mint/10"></span>
+              <span class="relative z-10 cta-label text-techBlue">預約諮詢</span>
+              <span class="tooltip-badge rounded-full border border-mint/30 bg-white px-3 py-1 text-xs text-mint shadow-mint">Status: Ready to Connect</span>
+            </a>
+            <a href="#solutions" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/70 px-7 py-4 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-techBlue/20 hover:text-techBlue hover:shadow-glow">
+              查看解決方案
+            </a>
+          </div>
+
+          <div class="mt-12 grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-3">
+            <div class="glass card-hover rounded-3xl p-5 shadow-soft">
+              <div class="text-3xl font-semibold text-techBlue">12+</div>
+              <div class="mt-2 text-sm text-slate-600">年行銷與媒體實戰經驗</div>
+            </div>
+            <div class="glass card-hover rounded-3xl p-5 shadow-soft">
+              <div class="text-3xl font-semibold text-techPurple">3+</div>
+              <div class="mt-2 text-sm text-slate-600">媒體 × 品牌 × 電商節點</div>
+            </div>
+            <div class="glass card-hover rounded-3xl p-5 shadow-soft">
+              <div class="text-3xl font-semibold text-mint">AI</div>
+              <div class="mt-2 text-sm text-slate-600">把複雜工作流變成可執行系統</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fade-up relative">
+          <div class="hero-ring absolute inset-0 rounded-[2rem] blur-2xl"></div>
+          <div class="glass-strong gradient-border relative overflow-hidden rounded-[2rem] p-6 shadow-soft">
+            <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-techBlue via-techPurple to-mint opacity-80"></div>
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div class="rounded-3xl border border-white/60 bg-white/70 p-5 shadow-sm">
+                <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">定位</div>
+                <div class="mt-3 text-lg font-semibold text-slate-950">AI Marketing 顧問</div>
+                <p class="mt-2 text-sm leading-7 text-slate-600">把知識、流程與客戶體驗，整理成能跑的系統。</p>
+              </div>
+              <div class="rounded-3xl border border-white/60 bg-white/70 p-5 shadow-sm">
+                <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">方法</div>
+                <div class="mt-3 text-lg font-semibold text-slate-950">實用，不表演</div>
+                <p class="mt-2 text-sm leading-7 text-slate-600">重視落地、節奏、效率，少一點口號，多一點結果。</p>
+              </div>
+              <div class="sm:col-span-2 rounded-3xl border border-white/60 bg-white/75 p-6 shadow-sm">
+                <div class="flex items-center justify-between gap-4">
+                  <div>
+                    <div class="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">Focus</div>
+                    <div class="mt-3 text-xl font-semibold text-slate-950">內容策略、媒體整合、數據洞察、AI 工作流</div>
+                  </div>
+                  <div class="rounded-2xl bg-gradient-to-br from-techBlue/10 to-mint/10 p-4 text-techBlue">
+                    <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 18V6"/><path d="M20 18V6"/><path d="M8 14l2-2 2 2 4-4"/><path d="M3 18h18"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
+      <div class="fade-up grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <div class="inline-flex rounded-full bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 shadow-sm">About</div>
+          <h2 class="mt-5 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">關於我｜蘇蘇蘇</h2>
+          <p class="mt-4 text-base leading-8 text-slate-600">
+            您好，我是蘇蘇蘇。在行銷與媒體領域深耕 12 年，我始終致力於將創意企劃與數據洞察完美結合，為品牌創造實質且具爆發力的商業價值。
+          </p>
+          <p class="mt-4 text-base leading-8 text-slate-600">
+            我的職涯跨足傳統媒體與頂尖數位平台，從八大電視台的業務基石打起，歷經 Anden Hud 資深行銷企劃，再到 LINE 禮物及 LINE 購物的行銷企劃。這段豐富的實戰歷程，淬鍊出我全方位的行銷視野。
+          </p>
+        </div>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="glass card-hover rounded-3xl p-6 shadow-soft">
+            <div class="flex items-center justify-between">
+              <div class="text-sm font-semibold text-slate-500">經驗年資</div>
+              <div class="rounded-full bg-techBlue/10 px-3 py-1 text-xs font-semibold text-techBlue">12 年</div>
+            </div>
+            <div class="mt-5 text-2xl font-semibold text-slate-950">媒體 × 品牌 × 電商</div>
+            <p class="mt-3 text-sm leading-7 text-slate-600">把不同場景的行銷語法整合成一致的品牌成長邏輯。</p>
+          </div>
+          <div class="glass card-hover rounded-3xl p-6 shadow-soft">
+            <div class="flex items-center justify-between">
+              <div class="text-sm font-semibold text-slate-500">工作流重點</div>
+              <div class="rounded-full bg-mint/10 px-3 py-1 text-xs font-semibold text-mint">System Thinking</div>
+            </div>
+            <div class="mt-5 text-2xl font-semibold text-slate-950">企劃 × 數據 × 執行</div>
+            <p class="mt-3 text-sm leading-7 text-slate-600">不是做更多，而是做得更準、更快、更可複製。</p>
+          </div>
+          <div class="sm:col-span-2 glass card-hover rounded-3xl p-6 shadow-soft">
+            <div class="flex items-start gap-4">
+              <div class="rounded-2xl bg-gradient-to-br from-techBlue/10 via-techPurple/10 to-mint/10 p-3 text-techBlue">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 2l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="text-lg font-semibold text-slate-950">核心主張</div>
+                <p class="mt-2 text-sm leading-7 text-slate-600">
+                  讓策略、內容、資料與自動化協同運作。把行銷從「靈感驅動」推進到「可管理、可衡量、可複製」的狀態。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solutions -->
+    <section id="solutions" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
+      <div class="fade-up">
+        <div class="inline-flex rounded-full bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 shadow-sm">AI Solutions</div>
+        <div class="mt-5 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <h2 class="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">AI 解決方案</h2>
+          <p class="max-w-2xl text-base leading-8 text-slate-600">把 AI 變成真的能用的工具，而不是會在簡報裡發光的裝飾品。</p>
+        </div>
+      </div>
+
+      <div class="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <article class="fade-up glass card-hover rounded-[1.75rem] p-6 shadow-soft">
+          <div class="text-xs font-semibold uppercase tracking-[0.18em] text-techBlue">01</div>
+          <h3 class="mt-4 text-xl font-semibold text-slate-950">內容生成與編修</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-600">建立高效率內容工作流，從主題、腳本到輸出格式，縮短產製時間。</p>
+        </article>
+        <article class="fade-up glass card-hover rounded-[1.75rem] p-6 shadow-soft">
+          <div class="text-xs font-semibold uppercase tracking-[0.18em] text-techPurple">02</div>
+          <h3 class="mt-4 text-xl font-semibold text-slate-950">行銷資料洞察</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-600">將零散資訊整理為可讀指標，協助團隊看懂趨勢、抓到決策重點。</p>
+        </article>
+        <article class="fade-up glass card-hover rounded-[1.75rem] p-6 shadow-soft">
+          <div class="text-xs font-semibold uppercase tracking-[0.18em] text-mint">03</div>
+          <h3 class="mt-4 text-xl font-semibold text-slate-950">工作流自動化</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-600">把重複工作流程模組化，讓團隊把時間花在策略與判斷，而不是搬運資料。</p>
+        </article>
+        <article class="fade-up glass card-hover rounded-[1.75rem] p-6 shadow-soft">
+          <div class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">04</div>
+          <h3 class="mt-4 text-xl font-semibold text-slate-950">顧客體驗優化</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-600">從接觸點到轉換路徑，設計更順暢的溝通節奏與使用體驗。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Cases -->
+    <section id="cases" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
+      <div class="fade-up">
+        <div class="inline-flex rounded-full bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 shadow-sm">Case Study</div>
+        <h2 class="mt-5 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">實戰案例</h2>
+        <p class="mt-4 max-w-3xl text-base leading-8 text-slate-600">以下以你提供的經歷脈絡做視覺化陳列，保留高端顧問頁面的說服力與掃描效率。</p>
+      </div>
+
+      <div class="mt-8 grid gap-5 lg:grid-cols-3">
+        <article class="fade-up glass card-hover rounded-[1.8rem] p-6 shadow-soft">
+          <div class="flex items-center justify-between">
+            <div class="text-sm font-semibold text-slate-500">媒體起點</div>
+            <div class="rounded-full bg-techBlue/10 px-3 py-1 text-xs font-semibold text-techBlue">八大電視台</div>
+          </div>
+          <h3 class="mt-5 text-xl font-semibold text-slate-950">從業務基石出發</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-600">理解媒體節奏、溝通邏輯與商業現場，建立對市場與受眾的第一手感知。</p>
+        </article>
+
+        <article class="fade-up glass card-hover rounded-[1.8rem] p-6 shadow-soft">
+          <div class="flex items-center justify-between">
+            <div class="text-sm font-semibold text-slate-500">品牌經營</div>
+            <div class="rounded-full bg-techPurple/10 px-3 py-1 text-xs font-semibold text-techPurple">Anden Hud</div>
+          </div>
+          <h3 class="mt-5 text-xl font-semibold text-slate-950">資深行銷企劃淬鍊</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-600">在品牌情境中磨練企劃整合、內容敘事與轉換設計能力。</p>
+        </article>
+
+        <article class="fade-up glass card-hover rounded-[1.8rem] p-6 shadow-soft">
+          <div class="flex items-center justify-between">
+            <div class="text-sm font-semibold text-slate-500">數位平台</div>
+            <div class="rounded-full bg-mint/10 px-3 py-1 text-xs font-semibold text-mint">LINE 生態圈</div>
+          </div>
+          <h3 class="mt-5 text-xl font-semibold text-slate-950">LINE 禮物 × LINE 購物</h3>
+          <p class="mt-3 text-sm leading-7 text-slate-600">把促銷、內容與商品節奏整合，建立更貼近消費場景的行銷方法。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Core products & solutions -->
+    <section id="core-products" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+      <div class="fade-up">
+        <div class="inline-flex rounded-full bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 shadow-sm">Core Products</div>
+        <div class="mt-5 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <h2 class="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">核心產品與技術解決方案</h2>
+            <p class="mt-4 max-w-3xl text-base leading-8 text-slate-600">整理三個值得關注的實際產品與技術案例，讓「AI × 行銷 × 自動化」的應用更具可視性。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 grid gap-5 lg:grid-cols-3">
+        <article class="fade-up glass card-hover rounded-[1.8rem] p-6 shadow-soft">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="text-sm font-semibold text-slate-500">Vibe Coding</p>
+              <h3 class="mt-3 text-lg font-semibold text-slate-950">Vibe Coding：行銷數據分析學習圈</h3>
+            </div>
+            <div class="rounded-2xl bg-techBlue/10 p-4 text-techBlue">
+              <i class="fa-solid fa-book-open text-2xl"></i>
+            </div>
+          </div>
+          <p class="mt-4 text-sm leading-7 text-slate-600">訂閱 Vibe Coding 行銷數據分析學習圈，跟著我們一同走入行銷數據分析與 vibe coding 自動化的世界。</p>
+          <a href="https://courses.taiwanmds.com/product/information?p=02c0c7b9ec7b11f0b3480242ac110002" target="_blank" rel="noreferrer" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-techBlue transition hover:text-techPurple">
+            查看產品
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </article>
+
+        <article class="fade-up glass card-hover rounded-[1.8rem] p-6 shadow-soft">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="text-sm font-semibold text-slate-500">保險 AI</p>
+              <h3 class="mt-3 text-lg font-semibold text-slate-950">保險機器人：當經驗成為奇點，AI 更是保險未來的引擎</h3>
+            </div>
+            <div class="rounded-2xl bg-techPurple/10 p-4 text-techPurple">
+              <i class="fa-solid fa-robot text-2xl"></i>
+            </div>
+          </div>
+          <p class="mt-4 text-sm leading-7 text-slate-600">從經驗、法條到正確說明，奇點讓每位保險專業者擁有一位懂法的科技夥伴。</p>
+          <a href="https://judgai.com/" target="_blank" rel="noreferrer" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-techBlue transition hover:text-techPurple">
+            查看產品
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </article>
+
+        <article class="fade-up glass card-hover rounded-[1.8rem] p-6 shadow-soft">
+          <div class="flex items-center justify-between gap-4">
+            <div>
+              <p class="text-sm font-semibold text-slate-500">語音 AI</p>
+              <h3 class="mt-3 text-lg font-semibold text-slate-950">SayMind：一站式語音轉錄，AI 筆記整理，自動口條訓練</h3>
+            </div>
+            <div class="rounded-2xl bg-mint/10 p-4 text-mint">
+              <i class="fa-solid fa-microphone-lines text-2xl"></i>
+            </div>
+          </div>
+          <p class="mt-4 text-sm leading-7 text-slate-600">使用 LangChain 搭建的 RAG 系統，可上傳 PDF 並進行精準問答。</p>
+          <a href="https://judgai.com/saymind" target="_blank" rel="noreferrer" class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-techBlue transition hover:text-techPurple">
+            查看產品
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Dependencies / Contact CTA -->
+    <section class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+      <div class="fade-up glass-strong gradient-border overflow-hidden rounded-[2rem] p-8 sm:p-10 shadow-soft">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <div class="inline-flex rounded-full bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 shadow-sm">Dependencies</div>
+            <h2 class="mt-5 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">多元社群圖示配置</h2>
+            <p class="mt-4 max-w-2xl text-base leading-8 text-slate-600">以外部依賴庫風格集中呈現，便於快速找到我的各個社群與聯絡入口。</p>
+          </div>
+          <div class="rounded-full border border-slate-200/80 bg-white/80 px-4 py-2 text-sm text-slate-500 shadow-sm">External Dependencies</div>
+        </div>
+
+        <div class="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <a href="https://aistudy.pse.is/linemdsgroup" target="_blank" rel="noreferrer" class="group rounded-[1.4rem] border border-slate-200/80 bg-white/85 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#06C755]/40 hover:shadow-glow">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-sm font-semibold text-slate-500">LINE</p>
+                <p class="mt-2 text-lg font-semibold text-slate-950">社群入口</p>
+              </div>
+              <div class="rounded-2xl bg-[#06C755]/10 p-3 text-[#06C755]">
+                <i class="fa-brands fa-line text-2xl"></i>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://www.facebook.com/MarketingDataScienceTMR/" target="_blank" rel="noreferrer" class="group rounded-[1.4rem] border border-slate-200/80 bg-white/85 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0866FF]/40 hover:shadow-glow">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-sm font-semibold text-slate-500">Facebook</p>
+                <p class="mt-2 text-lg font-semibold text-slate-950">粉絲專頁</p>
+              </div>
+              <div class="rounded-2xl bg-[#0866FF]/10 p-3 text-[#0866FF]">
+                <i class="fa-brands fa-facebook text-2xl"></i>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/in/howardzhong/" target="_blank" rel="noreferrer" class="group rounded-[1.4rem] border border-slate-200/80 bg-white/85 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[#0A66C2]/40 hover:shadow-glow">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-sm font-semibold text-slate-500">LinkedIn</p>
+                <p class="mt-2 text-lg font-semibold text-slate-950">專業連結</p>
+              </div>
+              <div class="rounded-2xl bg-[#0A66C2]/10 p-3 text-[#0A66C2]">
+                <i class="fa-brands fa-linkedin text-2xl"></i>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://github.com/HowardNTUST" target="_blank" rel="noreferrer" class="group rounded-[1.4rem] border border-slate-200/80 bg-white/85 p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-900/40 hover:shadow-glow">
+            <div class="flex items-center justify-between gap-4">
+              <div>
+                <p class="text-sm font-semibold text-slate-500">GitHub</p>
+                <p class="mt-2 text-lg font-semibold text-slate-950">開發與素材</p>
+              </div>
+              <div class="rounded-2xl bg-slate-950/5 p-3 text-slate-950">
+                <i class="fa-brands fa-github text-2xl"></i>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="mt-8 grid gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div>
+            <div class="inline-flex rounded-full bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 shadow-sm">Form</div>
+            <h3 class="mt-5 text-2xl font-semibold tracking-tight text-slate-950 sm:text-3xl">填寫需求表單</h3>
+            <p class="mt-4 max-w-2xl text-base leading-8 text-slate-600">若你想進一步了解 AI 行銷、資料分析或自動化流程，請直接填寫需求表單，我會依照你的場景安排後續對接。</p>
+          </div>
+
+          <div class="flex lg:justify-end">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3JTWL6YBmsVOehdYl6P9IEcfTa8iplJdwETpkc6O8r2WAIg/viewform?usp=publish-editor" target="_blank" rel="noreferrer"
+               class="cta-wrap group relative inline-flex items-center justify-center overflow-hidden rounded-full px-7 py-4 text-sm font-semibold shadow-soft transition-all duration-300 hover:-translate-y-0.5">
+              <span class="absolute inset-0 rounded-full bg-white/80"></span>
+              <span class="absolute inset-0 rounded-full bg-gradient-to-r from-techBlue via-techPurple to-mint opacity-90 p-[1px]"></span>
+              <span class="absolute inset-0 rounded-full bg-white/70 backdrop-blur-xl transition group-hover:bg-mint/10"></span>
+              <span class="relative z-10 cta-label text-techBlue">填寫需求表單</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / CTA -->
+    <section id="contact" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 lg:py-20">
+      <div class="fade-up glass-strong gradient-border overflow-hidden rounded-[2rem] p-8 sm:p-10 shadow-soft">
+        <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div>
+            <div class="inline-flex rounded-full bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-500 shadow-sm">Book a Session</div>
+            <h2 class="mt-5 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">預約諮詢，讓 AI 變成你的業務能力。</h2>
+            <p class="mt-4 max-w-2xl text-base leading-8 text-slate-600">適合需要內容策略、行銷流程優化、資料洞察、AI 導入規劃與團隊工作流升級的品牌與團隊。</p>
+          </div>
+
+          <div class="flex flex-col gap-4 sm:flex-row lg:justify-end">
+            <a href="https://calendar.app.google/TFanAbyEBCKUNZmu9" target="_blank" rel="noreferrer"
+               class="cta-wrap group relative inline-flex items-center justify-center overflow-hidden rounded-full px-7 py-4 text-sm font-semibold shadow-soft transition-all duration-300 hover:-translate-y-0.5">
+              <span class="absolute inset-0 rounded-full bg-white/80"></span>
+              <span class="absolute inset-0 rounded-full bg-gradient-to-r from-techBlue via-techPurple to-mint opacity-90 p-[1px]"></span>
+              <span class="absolute inset-0 rounded-full bg-white/70 backdrop-blur-xl transition group-hover:bg-mint/10"></span>
+              <span class="relative z-10 cta-label text-techBlue">預約諮詢</span>
+              <span class="tooltip-badge rounded-full border border-mint/30 bg-white px-3 py-1 text-xs text-mint shadow-mint">Status: Ready to Connect</span>
+            </a>
+            <a href="#home" class="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/70 px-7 py-4 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-0.5 hover:border-techBlue/20 hover:text-techBlue hover:shadow-glow">
+              回到首頁
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-slate-200/70 bg-white/40 py-8 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 text-sm text-slate-500 sm:px-6 lg:px-8 md:flex-row md:items-center md:justify-between">
+      <div>© 2026 蘇蘇蘇｜AI Marketing & Data Strategy</div>
+      <div>Elegant AI Tech · White Cyber Tech · Minimal Luxury</div>
+    </div>
+  </footer>
+
+  <script>
+    // Typewriter Effect
+    const text = 'Until Marketing Data science is common sense';
+    const target = document.getElementById('typewriter');
+    let idx = 0;
+
+    function typeWriter() {
+      if (idx <= text.length) {
+        target.textContent = text.slice(0, idx);
+        idx += 1;
+        setTimeout(typeWriter, idx < 8 ? 90 : 42);
+      }
+    }
+    typeWriter();
+
+    // Subtle particle network
+    const particles = document.getElementById('particles');
+    const count = 26;
+    const nodes = [];
+
+    for (let i = 0; i < count; i++) {
+      const node = document.createElement('span');
+      const size = Math.random() * 4 + 2;
+      node.style.position = 'absolute';
+      node.style.width = `${size}px`;
+      node.style.height = `${size}px`;
+      node.style.borderRadius = '9999px';
+      node.style.background = i % 3 === 0 ? 'rgba(37,99,235,0.22)' : i % 3 === 1 ? 'rgba(124,58,237,0.18)' : 'rgba(16,185,129,0.18)';
+      node.style.boxShadow = '0 0 20px rgba(37,99,235,0.06)';
+      node.style.left = `${Math.random() * 100}%`;
+      node.style.top = `${Math.random() * 100}%`;
+      node.style.opacity = `${0.35 + Math.random() * 0.55}`;
+      node.dataset.x = Math.random() * 0.34 + 0.06;
+      node.dataset.y = Math.random() * 0.28 + 0.04;
+      node.dataset.dx = Math.random() > 0.5 ? 1 : -1;
+      node.dataset.dy = Math.random() > 0.5 ? 1 : -1;
+      node.style.transition = 'transform 2s linear';
+      particles.appendChild(node);
+      nodes.push(node);
+    }
+
+    function moveNodes() {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      nodes.forEach((node, i) => {
+        const curX = parseFloat(node.style.left) / 100 * w;
+        const curY = parseFloat(node.style.top) / 100 * h;
+        let nx = curX + (parseFloat(node.dataset.x) * node.dataset.dx);
+        let ny = curY + (parseFloat(node.dataset.y) * node.dataset.dy);
+
+        if (nx < 0 || nx > w) node.dataset.dx = node.dataset.dx * -1;
+        if (ny < 0 || ny > h) node.dataset.dy = node.dataset.dy * -1;
+
+        const left = (Math.max(0, Math.min(w, nx)) / w) * 100;
+        const top = (Math.max(0, Math.min(h, ny)) / h) * 100;
+        node.style.left = `${left}%`;
+        node.style.top = `${top}%`;
+      });
+      requestAnimationFrame(moveNodes);
+    }
+    requestAnimationFrame(moveNodes);
+
+    // Intersection fade-up
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.16 });
+
+    document.querySelectorAll('.fade-up').forEach((el) => observer.observe(el));
+
+    // Navbar blur & subtle border on scroll
+    const nav = document.getElementById('navBar');
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (y > 10) {
+        nav.firstElementChild.classList.add('shadow-glow');
+        nav.firstElementChild.classList.add('border-slate-200/60');
+      } else {
+        nav.firstElementChild.classList.remove('shadow-glow');
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Close enough: make anchor jumps account for fixed header
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', (e) => {
+        const id = anchor.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) {
+          e.preventDefault();
+          const top = el.getBoundingClientRect().top + window.scrollY - 96;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
